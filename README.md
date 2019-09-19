@@ -5,3 +5,4 @@
 - Node JS 
 - Express
 - Body Parser
+- pg
