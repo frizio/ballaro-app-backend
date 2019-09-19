@@ -5,7 +5,9 @@ const api = require('./routes/api');
 // Initialization and configs
 const app = express();
 
-app.set('port', 3000);
+const PORT = process.env.PORT || 3000
+
+app.set('port', PORT);
 const port = app.get('port');
 
 // Middlewares
