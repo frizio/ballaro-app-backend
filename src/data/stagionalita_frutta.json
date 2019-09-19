@@ -1,0 +1,14 @@
+[
+    {"gennaio": ["Ananas", "Arance", "Avocado", "Banane", "Clementine", "Kiwi", "Mela", "Pera", "Pompelmo"]},
+    {"febbraio": ["Ananas", "Arance", "Avocado", "Banane", "Clementine", "Kiwi", "Mela", "Melone", "Pera", "Pompelmo"]},
+    {"marzo": ["Arance", "Avocado", "Banane", "Clementine", "Kiwi", "Limone", "Mela", "Pera", "Pompelmo"]},
+    {"aprile": ["Avocado", "Banane", "Kiwi", "Limone", "Mela", "Nespole", "Pera", "Pompelmo"]},
+    {"maggio": ["Albicocca", "Anguria", "Avocado", "Banane", "Ciliegie", "Fragole", "Kiwi", "Mela", "Nespole", "Pompelmo"]},
+    {"giugno": ["Albicocca", "Amarena", "Anguria", "Avocado", "Ciliegie", "Fragole", "Limone", "Mela", "Mirtilli", "Pesca", "Prugne"]},
+    {"luglio": ["Albicocca", "Amarena", "Anguria", "Avocado", "Ciliegie", "Fragole", "Lamponi", "Limone", "Mela", "Melone", "Mirtilli", "Pera", "Pesca", "Prugne"]},
+    {"agosto": ["Anguria", "Avocado", "Lamponi", "Mela", "Melone", "Mirtilli", "More", "Pera", "Pesca", "Prugne"]},
+    {"settembre": ["Anacardi", "Anguria", "Arachidi", "Avocado", "Dattero", "Fichi", "Fichi d’India", "Lamponi", "Mandorla", "Mela", "Melagrana", "Melone", "Mirtilli", "Nocciola", "Noce", "Pera", "Pesca", "Pinoli", "Pistacchi", "Prugne", "Uva"]},
+    {"ottobre": ["Anacardi", "Ananas", "Arachidi", "Avocado", "Castagne", "Dattero", "Fichi", "Kaki", "Limone", "Mandorla", "Mela", "Melagrana", "Nocciola", "Noce", "Pera", "Pinoli", "Pistacchi", "Uva"]},
+    {"novembre": ["Ananas", "Arance", "Avocado", "Banane", "Castagne", "Dattero", "Kaki", "Kiwi", "Limone", "Mela", "Melagrana", "Pera", "Pompelmo"]},
+    {"dicembre": ["Ananas", "Arance", "Avocado", "Banane", "Castagne", "Clementine", "Dattero", "Kaki", "Kiwi", "Mela", "Melone", "Pera", "Pompelmo"]}
+]
