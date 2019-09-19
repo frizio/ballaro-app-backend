@@ -5,7 +5,7 @@ router.get(
     '/',
     (req, res) => {
         console.log("Get route /");
-        res.json( { name: 'Max' } );
+        res.json( { name: 'Hello from Ballaro backend' } );
     }
 );
 
