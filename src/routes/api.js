@@ -38,4 +38,24 @@ router.get(
     }
 );
 
+router.get(
+    '/negozi', 
+    async (req, res) => {
+        console.log("Hit route /negozi with GET");
+        try {
+            console.log("Connect to the database. Request is: ");
+            console.log(req);
+            const client = await pool.connect()
+            const result = await client.query('SELECT * FROM negozi where provincia = \'Palermo\'');
+            const results = { 'info': (result) ? result.rows : null};
+            res.json(results);
+            client.release();
+        } catch (err) {
+            console.error(err);
+            res.send("Error " + err);
+        }
+    }
+);
+
+
 module.exports = router;
