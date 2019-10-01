@@ -47,7 +47,7 @@ router.get(
         try {
             console.log("Connect to the database");
             const client = await pool.connect()
-            const result = await client.query(`SELECT * FROM negozi where provincia = ${provincia}`);
+            const result = await client.query(`SELECT * FROM negozi where provincia = "${provincia}"`);
             const results = { 'info': (result) ? result.rows : null};
             res.json(results);
             client.release();
