@@ -14,7 +14,7 @@ router.get(
     '/',
     (req, res) => {
         console.log("Hit route /testdb with GET");
-        res.json( { name: 'Hello from Ballaro backend' } );
+        res.json( { name: 'Hello from Ballaro backend - v2' } );
     }
 );
 
