@@ -42,10 +42,10 @@ router.get(
     '/negozi/:provincia', 
     async (req, res) => {
         console.log("Hit route /negozi with GET");
-        console.log(req.params.provincia);
+        //console.log(req.params.provincia);
+        const provincia = req.params.provincia;
         try {
-            console.log("Connect to the database. Request is: ");
-            console.log(req);
+            console.log("Connect to the database");
             const client = await pool.connect()
             const result = await client.query(`SELECT * FROM negozi where provincia = ${provincia}`);
             const results = { 'info': (result) ? result.rows : null};
