@@ -46,7 +46,7 @@ router.get(
             console.log("Connect to the database. Request is: ");
             console.log(req);
             const client = await pool.connect()
-            const result = await client.query('SELECT * FROM negozi where provincia = \'Palermo\'');
+            const result = await client.query("SELECT * FROM negozi where provincia = 'Milano'");
             const results = { 'info': (result) ? result.rows : null};
             res.json(results);
             client.release();
