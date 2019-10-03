@@ -62,7 +62,7 @@ router.get(
     async (req, res) => {
         console.log("Hit route /negozi with GET");
         //console.log(req.params.provincia);
-        const provincia = req.params.provincia;
+        const provincia = req.params.provincia.toUpperCase();
         try {
             console.log("Connect to the database");
             const query_string = `SELECT * FROM negozi where provincia = \'${provincia}\'`;
