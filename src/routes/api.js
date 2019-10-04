@@ -39,13 +39,13 @@ router.get(
 );
 
 router.get(
-    '/negozi', 
+    '/mercati', 
     async (req, res) => {
-        console.log("Hit route /negozi with GET");
+        console.log("Hit route /mercati with GET");
         try {
             console.log("Connect to the database");
             const client = await pool.connect()
-            const query_string = 'SELECT * FROM negozi';
+            const query_string = 'SELECT * FROM mercati';
             const result = await client.query(query_string);
             const results = { 'info': (result) ? result.rows : null};
             res.json(results);
@@ -58,18 +58,41 @@ router.get(
 );
 
 router.get(
-    '/negozi/:provincia', 
+    '/mercati/:provincia', 
     async (req, res) => {
-        console.log("Hit route /negozi with GET");
+        console.log("Hit route /mercati with GET");
         //console.log(req.params.provincia);
         const provincia = req.params.provincia.toUpperCase();
-        try {
+        try { 
             console.log("Connect to the database");
-            const query_string = `SELECT * FROM negozi where provincia = \'${provincia}\'`;
+            const query_string = `SELECT * FROM mercati where provincia = \'${provincia}\'`;
             console.log(query_string);
             const client = await pool.connect()
             const result = await client.query(query_string);
-            const results = { 'info': (result) ? result.rows : null};
+            const results = { provincia: (result) ? result.rows : null};
+            res.json(results);
+            client.release();
+        } catch (err) {
+            console.error(err);
+            res.send("Error " + err);
+        }
+    }
+);
+
+
+router.get(
+    '/coltivazioni/:provincia/:n', 
+    async (req, res) => {
+        console.log("Hit route /coltivazioni with GET");
+        //console.log(req.params.provincia);
+        const provincia = req.params.provincia.toUpperCase();
+        try { 
+            console.log("Connect to the database");
+            const query_string = `SELECT * FROM coltivazioni where provincia = \'${provincia}\' order by quantita desc limit ${n}`;
+            console.log(query_string);
+            const client = await pool.connect()
+            const result = await client.query(query_string);
+            const results = { provincia: (result) ? result.rows : null};
             res.json(results);
             client.release();
         } catch (err) {
