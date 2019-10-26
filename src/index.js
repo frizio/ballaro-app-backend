@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const api = require('./routes/api');
 const path = require('path');
+const cors = require('cors');
 
 // Initialization and configs
 const app = express();
@@ -12,6 +13,7 @@ app.set('port', PORT);
 const port = app.get('port');
 
 // Middlewares
+app.use(cors());
 app.use(bodyParser.json());
 
 
