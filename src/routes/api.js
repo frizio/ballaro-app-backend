@@ -122,9 +122,6 @@ router.get(
     }
 );
 
-
-select specie,quantita from pescato where nome='TERRASINI' order by quantita desc limit 10;
-
 router.get(
     '/pescato/:porto/:n', 
     async (req, res) => {
