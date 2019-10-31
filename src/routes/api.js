@@ -103,5 +103,24 @@ router.get(
     }
 );
 
+router.get(
+    '/porti', 
+    async (req, res) => {
+        console.log("Hit route /porti with GET");
+        try {
+            console.log("Connect to the database");
+            const client = await pool.connect()
+            const query_string = 'SELECT * FROM porti';
+            const result = await client.query(query_string);
+            const results = (result) ? result.rows : null ;
+            res.json(results.info);
+            client.release();
+        } catch (err) {
+            console.error(err);
+            res.send("Error " + err);
+        }
+    }
+);
+
 
 module.exports = router;
