@@ -123,4 +123,29 @@ router.get(
 );
 
 
+select specie,quantita from pescato where nome='TERRASINI' order by quantita desc limit 10;
+
+router.get(
+    '/pescato/:porto/:n', 
+    async (req, res) => {
+        console.log("Hit route /pescato/porto with GET");
+        //console.log(req.params.provincia);
+        const porto = req.params.porto.toUpperCase();
+        const n = req.params.n;
+        try { 
+            console.log("Connect to the database");
+            const query_string = `SELECT specie, quantita FROM pescato where porto = \'${porto}\' order by quantita desc limit ${n}`;
+            console.log(query_string);
+            const client = await pool.connect()
+            const result = await client.query(query_string);
+            const results =  (result) ? result.rows : null ;
+            res.json(results);
+            client.release();
+        } catch (err) {
+            console.error(err);
+            res.send("Error " + err);
+        }
+    }
+);
+
 module.exports = router;
