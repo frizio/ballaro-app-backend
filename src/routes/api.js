@@ -47,7 +47,7 @@ router.get(
             const client = await pool.connect()
             const query_string = 'SELECT * FROM mercati';
             const result = await client.query(query_string);
-            const results = [ (result) ? result.rows : null ];
+            const results = (result) ? result.rows : null ;
             res.json(results.info);
             client.release();
         } catch (err) {
@@ -69,7 +69,7 @@ router.get(
             console.log(query_string);
             const client = await pool.connect()
             const result = await client.query(query_string);
-            const results = [ (result) ? result.rows : null ];
+            const results = (result) ? result.rows : null ;
             res.json(results);
             client.release();
         } catch (err) {
@@ -93,7 +93,7 @@ router.get(
             console.log(query_string);
             const client = await pool.connect()
             const result = await client.query(query_string);
-            const results = [ (result) ? result.rows : null ];
+            const results =  (result) ? result.rows : null ;
             res.json(results);
             client.release();
         } catch (err) {
