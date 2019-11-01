@@ -48,7 +48,7 @@ router.get(
             const query_string = 'SELECT * FROM mercati';
             const result = await client.query(query_string);
             const results = (result) ? result.rows : null ;
-            res.json(results.info);
+            res.json(results);
             client.release();
         } catch (err) {
             console.error(err);
