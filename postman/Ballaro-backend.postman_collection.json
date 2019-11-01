@@ -1,0 +1,181 @@
+{
+	"info": {
+		"_postman_id": "9bea9d1f-167c-4ddf-89dd-412ce4c41743",
+		"name": "Ballaro-backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://ballaro.herokuapp.com/api/mercati",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://ballaro.herokuapp.com/api/mercati/bologna",
+					"protocol": "https",
+					"host": [
+						"ballaro",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"mercati",
+						"bologna"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://ballaro.herokuapp.com/api/coltivazioni/palermo/5",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://ballaro.herokuapp.com/api/coltivazioni/palermo/5",
+					"protocol": "https",
+					"host": [
+						"ballaro",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"coltivazioni",
+						"palermo",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://ballaro.herokuapp.com/data/fruttadistagione",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://ballaro.herokuapp.com/data/fruttadistagione",
+					"protocol": "https",
+					"host": [
+						"ballaro",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"data",
+						"fruttadistagione"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://ballaro.herokuapp.com/api/mercati",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://ballaro.herokuapp.com/api/mercati",
+					"protocol": "https",
+					"host": [
+						"ballaro",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"mercati"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://nominatim.openstreetmap.org/reverse?format=json&lat=52.5487429714954&lon=-1.81602098644987&zoom=18&addressdetails=1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://nominatim.openstreetmap.org/reverse?format=json&lat=38.0817&lon=13.5067&zoom=18&addressdetails=1",
+					"protocol": "https",
+					"host": [
+						"nominatim",
+						"openstreetmap",
+						"org"
+					],
+					"path": [
+						"reverse"
+					],
+					"query": [
+						{
+							"key": "format",
+							"value": "json"
+						},
+						{
+							"key": "lat",
+							"value": "38.0817"
+						},
+						{
+							"key": "lon",
+							"value": "13.5067"
+						},
+						{
+							"key": "zoom",
+							"value": "18"
+						},
+						{
+							"key": "addressdetails",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://ballaro.herokuapp.com/api/porti",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://ballaro.herokuapp.com/api/porti",
+					"protocol": "https",
+					"host": [
+						"ballaro",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"porti"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://ballaro.herokuapp.com/api/pescato/terrasini/5",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://ballaro.herokuapp.com/api/porti",
+					"protocol": "https",
+					"host": [
+						"ballaro",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"porti"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
