@@ -65,7 +65,7 @@ router.get(
         const provincia = req.params.provincia.toUpperCase();
         try { 
             console.log("Connect to the database");
-            const query_string = `SELECT * FROM mercati where provincia = \'${provincia}\'`;
+            const query_string = `SELECT * FROM mercati where UPPER(provincia) = \'${provincia}\'`;
             console.log(query_string);
             const client = await pool.connect()
             const result = await client.query(query_string);
@@ -85,11 +85,11 @@ router.get(
     async (req, res) => {
         console.log("Hit route /coltivazioni with GET");
         //console.log(req.params.provincia);
-        const provincia = req.params.provincia;//.toUpperCase();
+        const provincia = req.params.provincia.toUpperCase();
         const n = req.params.n;
         try { 
             console.log("Connect to the database");
-            const query_string = `SELECT * FROM coltivazioni where provincia = \'${provincia}\' order by quantita desc limit ${n}`;
+            const query_string = `SELECT * FROM coltivazioni where UPPER(provincia) = \'${provincia}\' order by quantita desc limit ${n}`;
             console.log(query_string);
             const client = await pool.connect()
             const result = await client.query(query_string);
@@ -131,7 +131,7 @@ router.get(
         const n = req.params.n;
         try { 
             console.log("Connect to the database");
-            const query_string = `SELECT specie, quantita FROM pescato where porto = \'${porto}\' order by quantita desc limit ${n}`;
+            const query_string = `SELECT specie, quantita FROM pescato where UPPER(porto) = \'${porto}\' order by quantita desc limit ${n}`;
             console.log(query_string);
             const client = await pool.connect()
             const result = await client.query(query_string);
