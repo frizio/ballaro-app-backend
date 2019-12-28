@@ -1,4 +1,6 @@
 const { Router } = require('express');
+const rp = require('request-promise');
+const { requstPositionInfo } = require('../services/position');
 const { Pool } = require('pg');
 
 const router = Router();
@@ -144,5 +146,110 @@ router.get(
         }
     }
 );
+
+// Parameters:
+// lat
+// lon
+// dist - search radius (in km), optional
+// n - max number of results, optional
+router.get(
+    '/nearby/:tipo(porti|mercati|pescato|coltivazioni)',
+    async (req, res) => {
+        const tipo = req.params.tipo;
+        console.log(`Hit route /nearby/${tipo} with GET`);
+
+        let lat = parseFloat(req.query.lat);
+        let lon = parseFloat(req.query.lon);
+        if (isNaN(lat) || isNaN(lon))
+            return res.status(400).send("Bad request");
+
+        let dist = req.query.dist;
+        if (typeof dist == 'undefined')
+            dist = 50;
+
+        let n = req.query.n;
+        if (typeof n == 'undefined')
+            n = 1;
+
+        let results = [];
+        if (tipo === 'coltivazioni')
+            results = await nearbyColtivations(lat, lon);
+        else
+            results = await nearbyThings(lat, lon, tipo, dist, n);
+        return await res.json(results)
+    }
+);
+
+async function nearbyColtivations(lat, lon) {
+    try {
+        let position = await requstPositionInfo(lat, lon);
+        let provincia = position.county.toUpperCase();
+        if (!(new RegExp(/^[a-z ]+$/i)).test(provincia))
+            return [];
+        let sql = `SELECT * FROM coltivazioni WHERE UPPER(provincia) = '${provincia}'`;
+        console.log("Connect to the database");
+        const client = await pool.connect();
+        console.log(sql);
+        const result = await client.query(sql);
+        let results =  (result) ? result.rows : [];
+        client.release();
+        return results;
+    } catch (e) {
+        console.log(e);
+        return [];
+    }
+}
+
+async function nearbyThings(lat, lon, tipo, dist, n) {
+    const distToLat = dist / 111; // Convert distance to latitude, each latitude degree ~ 111 km
+    const lonDegreeLength = Math.cos(lat * (Math.PI/180)) * 111.321; // 1 longitude degree in km at given latitude
+    const distToLon = dist / lonDegreeLength; // Convert distance to longitude
+
+    const minLat = lat - distToLat;
+    const maxLat = lat + distToLat;
+    const minLon = lon - distToLon;
+    const maxLon = lon + distToLon;
+
+    try {
+        let sql = `SELECT * FROM ${tipo} WHERE latitude BETWEEN ${minLat} AND ${maxLat} AND longitude BETWEEN ${minLon} AND ${maxLon}`;
+        console.log("Connect to the database");
+        console.log(sql);
+        const client = await pool.connect();
+        const result = await client.query(sql);
+        let rows =  (result) ? result.rows : [];
+        let results = [];
+        client.release();
+        for (let i = 0; i < rows.length; i++) {
+            let row = rows[i];
+            row.dist = distance(lat, lon, parseFloat(row.latitude), parseFloat(row.longitude));
+            if (row.dist <= dist)
+                results.push(row);
+        }
+        results.sort(function(x, y) {
+            if (x.dist < y.dist) return -1;
+            if (x.dist > y.dist) return 1;
+            return 0;
+        });
+        results = results.slice(0, n);
+        return results;
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+function distance(lat1, lon1, lat2, lon2) {
+    const decimals = 4;
+    const earthRadius = 6371; // km
+
+    let dLat = (lat2 - lat1) * Math.PI / 180;
+    let dLon = (lon2 - lon1) * Math.PI / 180;
+    let lat1rad = lat1 * Math.PI / 180;
+    let lat2rad = lat2 * Math.PI / 180;
+
+    let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1rad) * Math.cos(lat2rad);
+    let d = earthRadius * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return Math.round(d * Math.pow(10, decimals)) / Math.pow(10, decimals);
+}
 
 module.exports = router;
