@@ -154,15 +154,15 @@ router.post(
         let lat = req.body.lat;
         let lon = req.body.lon;
         let market = req.body.market;
-        if (!isNaN(lat) && !isNaN(lon) && new RegExp(/^[a-z ]+$/i).test(provincia)) {
-            let position = await requstPositionInfo(lat, lon);
-            sql = `INSERT INTO mercati VALUES ('${position.city}', '${position.county}', '${position.state}', '${market}', ${position.osmid}, ${lon}, ${lat});`;
-            const sql = 'INSERT INTO mercati VALUES($1, $2, $3, $4, $5, $6, $7)';
-            const values = [position.city, position.county, position.state, market, position.osmid, lon, lat];
+        if (!isNaN(lat) && !isNaN(lon) && new RegExp(/^[a-z ]+$/i).test(market)) {
             try {
+                let position = await requstPositionInfo(lat, lon);
+                const sql = 'INSERT INTO mercati VALUES($1, $2, $3, $4, $5, $6, $7)';
+                const values = [position.city, position.county, position.state, market, position.osmid, lon, lat];
                 await pool.query(sql, values);
-                res.status(200).send("OK")
+                res.status(200).send("OK");
             } catch (err) {
+                console.log(err);
                 res.status(400).send("Bad request")
             }
         } else {
