@@ -158,6 +158,9 @@ router.post(
             try {
                 let position = await requstPositionInfo(lat, lon);
                 const sql = 'INSERT INTO mercati VALUES($1, $2, $3, $4, $5, $6, $7)';
+                position.city = position.city.substring(0, 30);
+                position.county = position.county.substring(0, 30);
+                position.state = position.state.substring(0, 30);
                 const values = [position.city, position.county, position.state, market, position.osmid, lon, lat];
                 await pool.query(sql, values);
                 res.status(200).send("OK");
