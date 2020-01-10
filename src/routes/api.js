@@ -28,7 +28,7 @@ router.get(
         try {
             console.log("Connect to the database. Request is: ");
             //console.log(req);
-            const client = await pool.connect()
+            const client = await pool.connect();
             const result = await client.query('SELECT * FROM test_table');
             const results = { 'info': (result) ? result.rows : null};
             res.json(results);
@@ -143,6 +143,30 @@ router.get(
         } catch (err) {
             console.error(err);
             res.send("Error " + err);
+        }
+    }
+);
+
+router.post(
+    '/add-market',
+    async (req, res) => {
+        console.log("Hit route /add-market with POST");
+        let lat = req.body.lat;
+        let lon = req.body.lon;
+        let market = req.body.market;
+        if (!isNaN(lat) && !isNaN(lon) && new RegExp(/^[a-z ]+$/i).test(provincia)) {
+            let position = await requstPositionInfo(lat, lon);
+            sql = `INSERT INTO mercati VALUES ('${position.city}', '${position.county}', '${position.state}', '${market}', ${position.osmid}, ${lon}, ${lat});`;
+            const sql = 'INSERT INTO mercati VALUES($1, $2, $3, $4, $5, $6, $7)';
+            const values = [position.city, position.county, position.state, market, position.osmid, lon, lat];
+            try {
+                await pool.query(sql, values);
+                res.status(200).send("OK")
+            } catch (err) {
+                res.status(400).send("Bad request")
+            }
+        } else {
+            res.status(400).send("Bad request")
         }
     }
 );

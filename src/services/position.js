@@ -9,6 +9,7 @@ class Position {
         this.county = json.address.county; // provincia
         this.city = json.address.city; // comune
         this.road = json.address.road; // via
+        this.osmid = json.osm_id
     }
 }
 
