@@ -154,14 +154,17 @@ router.post(
         let lat = req.body.lat;
         let lon = req.body.lon;
         let market = req.body.market;
-        if (!isNaN(lat) && !isNaN(lon) && new RegExp(/^[a-z ]+$/i).test(market)) {
+        let day = req.body.day;
+        let other = req.body.other;
+        const days = ["Everyday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+        if (!isNaN(lat) && !isNaN(lon) && days.includes(day)) {
             try {
                 let position = await requstPositionInfo(lat, lon);
-                const sql = 'INSERT INTO mercati VALUES($1, $2, $3, $4, $5, $6, $7)';
+                const sql = 'INSERT INTO mercati VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)';
                 position.city = position.city.substring(0, 30);
                 position.county = position.county.substring(0, 30);
                 position.state = position.state.substring(0, 30);
-                const values = [position.city, position.county, position.state, market, position.osmid, lon, lat];
+                const values = [position.city, position.county, position.state, market, position.osmid, lon, lat, day, other];
                 await pool.query(sql, values);
                 res.status(200).send("OK");
             } catch (err) {
