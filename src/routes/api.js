@@ -165,7 +165,9 @@ router.post(
                 position.county = position.county.substring(0, 30);
                 position.state = position.state.substring(0, 30);
                 const values = [position.city, position.county, position.state, market, position.osmid, lon, lat, day, other];
-                await pool.query(sql, values);
+                const client = await pool.connect();
+                await client.query(sql, values);
+                client.release();
                 res.status(200).send("OK");
             } catch (err) {
                 console.log(err);
