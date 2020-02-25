@@ -163,9 +163,9 @@ router.post(
                 console.log('posizione');
                 console.log(position);
                 const sql = 'INSERT INTO mercati VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)';
-                position.city = position.city.substring(0, 30);
-                position.county = position.county.substring(0, 30);
-                position.state = position.state.substring(0, 30);
+                position.city =  position.city ? position.city.substring(0, 30) : '';
+                position.county = position.county ? position.county.substring(0, 30) : '';
+                position.state = position.state ? position.state.substring(0, 30) : '';
                 const values = [position.city, position.county, position.state, market, position.osmid, lon, lat, day, other];
                 const client = await pool.connect();
                 await client.query(sql, values);
