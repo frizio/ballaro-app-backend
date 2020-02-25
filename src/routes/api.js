@@ -170,7 +170,7 @@ router.post(
                 const client = await pool.connect();
                 await client.query(sql, values);
                 client.release();
-                res.status(200).send("OK");
+                res.status(200).send();
             } catch (err) {
                 console.log(err);
                 res.status(400).send("Bad request")
