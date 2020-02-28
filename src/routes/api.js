@@ -162,7 +162,7 @@ router.post(
                 let position = await requstPositionInfo(lat, lon);
                 console.log('posizione');
                 console.log(position);
-                const sql = 'INSERT INTO mercati VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)';
+                const sql = 'INSERT INTO mercati VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, false)';
                 position.city =  position.city ? position.city.substring(0, 30) : '';
                 position.county = position.county ? position.county.substring(0, 30) : '';
                 position.state = position.state ? position.state.substring(0, 30) : '';
